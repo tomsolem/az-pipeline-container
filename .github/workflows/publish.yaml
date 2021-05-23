@@ -1,33 +1,23 @@
-name: Docker Image CI
-
-on: 
-  push:
-    branches:
-    - main
-
+name: Publish to Registry
+on:    
+  release:
+      types: [published]
+ # push:
+ #   branches:
+ #     - main
 jobs:
-  build:
+  update:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
-    - name: Github Tag Bump
-      uses: anothrNick/github-tag-action@1.35.0
-      id: tag
-      with:
-        fetch-depth: '0'
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        WITH_V: true   
-        DEFAULT_BUMP: patch       
     - name: Publish to Registry
       uses: elgohr/Publish-Docker-Github-Action@master
-      with:
-        name: tomso/az-pipeline-container
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
-        snapshot: true
-        cache: true
-        tags: ${{ steps.tag.output.new_tag }},latest
+        with:
+          name: tomso/az-pipeline-container
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          snapshot: true
+          cache: true
+          tag_semver: true
     - name: Update Docker hub description
       uses: peter-evans/dockerhub-description@v2.0.0
       env:
