@@ -1,8 +1,9 @@
 name: Publish to Registry
 on:
-  release:
-    types: 
-      - created
+  push:
+    # Sequence of patterns matched against refs/tags
+    tags:        
+      - '*'             # Push events to v1 tag
 
 jobs:
   update:
