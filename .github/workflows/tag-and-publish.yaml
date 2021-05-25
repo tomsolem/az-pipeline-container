@@ -27,13 +27,13 @@ jobs:
       - 
         name: Publish to Registry
         uses: elgohr/Publish-Docker-Github-Action@master
-          with:
-            name: tomso/az-pipeline-container
-            username: ${{ secrets.DOCKER_USERNAME }}
-            password: ${{ secrets.DOCKER_PASSWORD }}
-            snapshot: true
-            cache: true
-            tags: "latest,${{ steps.tag_version.outputs.new_tag }}"
+        with:
+          name: tomso/az-pipeline-container
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          snapshot: true
+          cache: true
+          tags: "latest,${{ steps.tag_version.outputs.new_tag }}"
       - 
         name: Update Docker hub description
         uses: peter-evans/dockerhub-description@v2.0.0
