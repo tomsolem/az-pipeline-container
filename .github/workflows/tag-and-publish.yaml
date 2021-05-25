@@ -13,7 +13,7 @@ jobs:
           fetch-depth: 0
       - 
         name: Find next tag version
-        uses: anothrNick/github-tag-action@1.26.0
+        uses: anothrNick/github-tag-action@1.35.0
         id: tag_version
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
